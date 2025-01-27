@@ -7,7 +7,7 @@ const generateTokenandsetCookie = (userId,res)=>{
 
   res.cookie("jwt",token,{
     maxAge : 15*24*60*60*1000,
-    httpOnly:true,
+    httpOnly:false,
     sameSite:"Strict",
     secure:process.env.NODE_ENV !== 'development'  // secure set true only if not in development phase
   })
