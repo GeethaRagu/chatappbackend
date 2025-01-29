@@ -11,19 +11,20 @@ export const sendMesssage = async (req, res) => {
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
-   // console.log(conversation)
+   
     if (!conversation) {
-      Conversation.create({
+     conversation =  await Conversation.create({
         participants: [senderId, receiverId],
+        
       });
     }
-
+   
     const newMessage = new Message({
       senderId,
       receiverId,
       message,
     });
-    //console.log(newMessage);
+   // console.log(newMessage);
     if (newMessage) {
       conversation.messages.push(newMessage._id);
     }
